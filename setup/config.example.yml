@@ -1,0 +1,16 @@
+flask:
+  secret_key: 
+
+form_fox:
+  form_id: 
+
+google:
+  scopes:
+    - 'https://www.googleapis.com/auth/documents'
+  doc_id: 
+
+discord:
+  server_id: 
+  raider_role_id: 
+  pug_raider_role_id: 
+  bot_token: 
