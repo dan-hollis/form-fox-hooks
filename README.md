@@ -2,11 +2,22 @@ This is a simple Flask app for handling [Form Fox](https://github.com/dan-hollis
 
 Currently handles the following:
 
-* When a form is accepted and the user is a guild member (has `Guild Member` role):
+* Assigns `Guild Member` role if user answers `Yes` to "Are you a guild member?" question
 
-    * Assigns them the `Raider` role
+* Assigns a role depending on which submission accept type is given
+  
+  * `Accept - Prebis`
 
-* When a form is accepted and the user is not a guild member:
+    * Assigns the `Prebis` role
 
-    * Assigns them the `PUG Raider` role
-    * Adds their username to a Google Doc to track PUG Raiders
+  * `Accept - Trial Raider`
+
+    * Assigns the `Trial Raider` role
+
+  * `Accept - Raider`
+
+    * Assigns the `Raider` role
+
+  * `Accept - PUG Raider`
+
+    * Assigns the `PUG Raider` role

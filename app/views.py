@@ -14,7 +14,7 @@ logger = get_logger(__name__)
 
 
 @discord_ff.route('/discord-ff-events', methods=['POST', 'GET'])
-def events():
+def events():  # noqa: PLR0912
     if request.method == 'GET':
         return '', 200
 
@@ -27,14 +27,25 @@ def events():
 
         log_request_data(logger, json.dumps(data, indent=4), 'discord-ff-events')
 
+        acceptance_type = data['acceptance_type']
+
+        if acceptance_type == 'deny':
+            return '', 200
+
         usernames = []
         if data['response']['form']['hid'] == current_app.config['FF_FORM_ID']:
             is_guildie = data['response']['answers'][0] == 'Yes'
             user_id = data['response']['user_id']
+            raider_role_id = None
 
-            if is_guildie:
-                raider_role_id = current_app.config['RAIDER_ROLE_ID']
-            else:
+            if is_guildie and acceptance_type != 'pug':
+                if acceptance_type == 'prebis':
+                    raider_role_id = current_app.config['PREBIS_ROLE_ID']
+                elif acceptance_type == 'trial_raider':
+                    raider_role_id = current_app.config['TRIAL_RAIDER_ROLE_ID']
+                elif acceptance_type == 'raider':
+                    raider_role_id = current_app.config['RAIDER_ROLE_ID']
+            elif acceptance_type == 'pug_raider':
                 raider_role_id = current_app.config['PUG_RAIDER_ROLE_ID']
                 usernames_raw = data['response']['answers'][0]
                 # Split on common separators: comma, newline, pipe, semicolon, tab
@@ -84,7 +95,7 @@ def events():
                     'Failed to add user role %s to %s: %s',
                     raider_role_id,
                     user_id,
-                    role_request,
+                    role_request.text,
                 )
 
         current_app.logger.info('Successfully processed Discord FF event')

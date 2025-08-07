@@ -52,6 +52,7 @@ app.config['GOOGLE_CREDS'] = creds
 app.config['GOOGLE_DOC_ID'] = config['google']['doc_id']
 app.config['FF_FORM_ID'] = config['form_fox']['form_id']
 app.config['DISCORD_SERVER_ID'] = config['discord']['server_id']
+app.config['PREBIS_ROLE_ID'] = config['discord']['prebis_role_id']
 app.config['RAIDER_ROLE_ID'] = config['discord']['raider_role_id']
 app.config['PUG_RAIDER_ROLE_ID'] = config['discord']['pug_raider_role_id']
 app.config['DISCORD_BOT_TOKEN'] = config['discord']['bot_token']

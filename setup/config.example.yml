@@ -11,6 +11,8 @@ google:
 
 discord:
   server_id: 
+  prebis_role_id: 
+  trial_role_id: 
   raider_role_id: 
   pug_raider_role_id: 
   bot_token: 
